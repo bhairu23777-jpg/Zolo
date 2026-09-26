@@ -1,11 +1,15 @@
 const express = require("express");
+const cors = require("cors");
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
 
 const app = express();
 
+// Middleware
+app.use(cors());
 app.use(express.json());
 
+// PostgreSQL connection
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -41,7 +45,7 @@ app.get("/api/health", async (req, res) => {
       time: result.rows[0].now
     });
   } catch (error) {
-    console.error(error);
+    console.error("Health check error:", error);
 
     res.status(500).json({
       success: false,
@@ -50,11 +54,17 @@ app.get("/api/health", async (req, res) => {
   }
 });
 
-// Signup
+// Signup API
 app.post("/api/signup", async (req, res) => {
   try {
-    const { full_name, mobile, email, password } = req.body;
+    const {
+      full_name,
+      mobile,
+      email,
+      password
+    } = req.body;
 
+    // Check required fields
     if (!full_name || !mobile || !email || !password) {
       return res.status(400).json({
         success: false,
@@ -62,6 +72,7 @@ app.post("/api/signup", async (req, res) => {
       });
     }
 
+    // Password validation
     if (password.length < 6) {
       return res.status(400).json({
         success: false,
@@ -69,8 +80,13 @@ app.post("/api/signup", async (req, res) => {
       });
     }
 
+    // Check existing user
     const existingUser = await pool.query(
-      "SELECT id FROM users WHERE email = $1 OR mobile = $2",
+      `
+      SELECT id
+      FROM users
+      WHERE email = $1 OR mobile = $2
+      `,
       [email, mobile]
     );
 
@@ -81,16 +97,31 @@ app.post("/api/signup", async (req, res) => {
       });
     }
 
+    // Hash password
     const passwordHash = await bcrypt.hash(password, 12);
 
+    // Insert user
     const result = await pool.query(
-      `INSERT INTO users
-       (full_name, mobile, email, password_hash)
-       VALUES ($1, $2, $3, $4)
-       RETURNING id, full_name, mobile, email, created_at`,
-      [full_name, mobile, email, passwordHash]
+      `
+      INSERT INTO users
+      (full_name, mobile, email, password_hash)
+      VALUES ($1, $2, $3, $4)
+      RETURNING
+        id,
+        full_name,
+        mobile,
+        email,
+        created_at
+      `,
+      [
+        full_name,
+        mobile,
+        email,
+        passwordHash
+      ]
     );
 
+    // Success response
     res.status(201).json({
       success: true,
       message: "Account created successfully 🎉",
@@ -98,7 +129,7 @@ app.post("/api/signup", async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("Signup error:", error);
 
     res.status(500).json({
       success: false,
@@ -107,8 +138,10 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
+// Server
 const PORT = process.env.PORT || 3000;
 
+// Initialize database and start server
 initializeDatabase()
   .then(() => {
     app.listen(PORT, () => {
@@ -116,6 +149,10 @@ initializeDatabase()
     });
   })
   .catch((error) => {
-    console.error("Database initialization failed:", error);
+    console.error(
+      "Database initialization failed:",
+      error
+    );
+
     process.exit(1);
   });
