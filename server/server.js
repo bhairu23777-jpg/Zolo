@@ -63,7 +63,67 @@ app.post("/api/signup", async (req, res) => {
       email,
       password
     } = req.body;
+    
+// Login API
+app.post("/api/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required"
+      });
+    }
+
+    const result = await pool.query(
+      `SELECT id, full_name, mobile, email, password_hash
+       FROM users
+       WHERE email = $1`,
+      [email]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password"
+      });
+    }
+
+    const user = result.rows[0];
+
+    const passwordMatch = await bcrypt.compare(
+      password,
+      user.password_hash
+    );
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Login successful 🎉",
+      user: {
+        id: user.id,
+        full_name: user.full_name,
+        mobile: user.mobile,
+        email: user.email
+      }
+    });
+
+  } catch (error) {
+    console.error("Login error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Login failed"
+    });
+  }
+});
     // Check required fields
     if (!full_name || !mobile || !email || !password) {
       return res.status(400).json({
