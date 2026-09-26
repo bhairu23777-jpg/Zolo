@@ -1,1 +1,60 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zolo | Create Account</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="index.html" class="logo">zolo</a>
+</header>
+
+<main class="auth-page">
+
+  <div class="auth-card">
+
+    <h1>Create your account</h1>
+    <p>Start your NEET preparation with Zolo.</p>
+
+    <form onsubmit="signup(event)">
+
+      <label>Full Name</label>
+      <input type="text" required>
+
+      <label>Mobile Number</label>
+      <input type="tel" required>
+
+      <label>Email</label>
+      <input type="email" required>
+
+      <label>Password</label>
+      <input type="password" required>
+
+      <button type="submit">Create Account</button>
+
+    </form>
+
+    <p class="auth-bottom">
+      Already have an account?
+      <a href="login.html">Login</a>
+    </p>
+
+  </div>
+
+</main>
+
+<script>
+function signup(event) {
+  event.preventDefault();
+
+  alert("Account creation backend mein next connect hoga.");
+}
+</script>
+
+</body>
+</html>
