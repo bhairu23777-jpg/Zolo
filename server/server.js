@@ -46,6 +46,21 @@ await pool.query(`     CREATE TABLE IF NOT EXISTS student_profiles (
     )
   `);
 
+   await pool.query(`
+  CREATE TABLE IF NOT EXISTS test_results (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL
+      REFERENCES users(id) ON DELETE CASCADE,
+    subject VARCHAR(30) NOT NULL,
+    total_questions INTEGER NOT NULL DEFAULT 0,
+    attempted INTEGER NOT NULL DEFAULT 0,
+    correct INTEGER NOT NULL DEFAULT 0,
+    wrong INTEGER NOT NULL DEFAULT 0,
+    score INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )
+`);   
+      
 console.log("Database tables ready");
 }
 
