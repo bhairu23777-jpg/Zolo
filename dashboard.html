@@ -11,43 +11,108 @@
 <body>
 
 <header class="navbar">
-  <a href="index.html" class="logo">zolo</a>
 
-  <div>
+<a href="index.html" class="logo">zolo</a>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="test.html">Tests</a>
+    <a href="profile.html">Profile</a>
     <button onclick="logout()">Logout</button>
-  </div>
+  </nav>
+
 </header>
 
 <main class="dashboard-page">
 
   <section class="dashboard-header">
-    <h1 id="welcome">Welcome to Zolo 👋</h1>
-    <p>Your NEET preparation dashboard</p>
+
+```
+<h1 id="welcome">Welcome to Zolo 👋</h1>
+
+<p>
+  Your personal NEET preparation dashboard
+</p>
+```
+
   </section>
 
   <section class="dashboard-grid">
 
 ```
+<!-- Test Generator -->
+
 <div class="dashboard-card">
+
   <h2>📝 Test Generator</h2>
-  <p>Create a custom NEET test by subject, chapter and question count.</p>
+
+  <p>
+    Create a custom NEET test by selecting
+    subject, chapter and number of questions.
+  </p>
+
   <a href="test.html">
     <button>Start Test</button>
   </a>
+
 </div>
 
+
+<!-- Results -->
+
 <div class="dashboard-card">
+
   <h2>📊 My Results</h2>
-  <p>View your test attempts, scores and performance analytics.</p>
-  <a href="profile.html">
-  <button>My Profile</button>
-</a>
+
+  <p>
+    View your test attempts, marks and
+    performance analytics.
+  </p>
+
+  <button disabled>
+    Coming Soon
+  </button>
+
 </div>
 
+
+<!-- Profile -->
+
 <div class="dashboard-card">
+
   <h2>👤 My Profile</h2>
-  <p>Manage your student profile and NEET preparation details.</p>
-  <button disabled>Coming Soon</button>
+
+  <p>
+    Update your personal details,
+    medium and NEET target year.
+  </p>
+
+  <a href="profile.html">
+    <button>Open Profile</button>
+  </a>
+
+</div>
+```
+
+  </section>
+
+  <!-- Quick Actions -->
+
+  <section class="dashboard-quick">
+
+```
+<h2>Quick Start 🚀</h2>
+
+<div class="quick-actions">
+
+  <a href="test.html">
+    <button>Start Free Test</button>
+  </a>
+
+  <a href="profile.html">
+    <button>Complete Profile</button>
+  </a>
+
 </div>
 ```
 
@@ -56,21 +121,44 @@
 </main>
 
 <script>
-const savedUser = sessionStorage.getItem("zolo_user");
+
+const savedUser =
+  sessionStorage.getItem("zolo_user");
+
 
 if (!savedUser) {
-  window.location.href = "login.html";
-} else {
-  const user = JSON.parse(savedUser);
 
-  document.getElementById("welcome").textContent =
-    `Welcome, ${user.full_name} 👋`;
+  window.location.href = "login.html";
+
+} else {
+
+  try {
+
+    const user =
+      JSON.parse(savedUser);
+
+    document.getElementById("welcome").textContent =
+      `Welcome, ${user.full_name} 👋`;
+
+  } catch (error) {
+
+    sessionStorage.removeItem("zolo_user");
+
+    window.location.href = "login.html";
+
+  }
+
 }
+
 
 function logout() {
+
   sessionStorage.removeItem("zolo_user");
+
   window.location.href = "login.html";
+
 }
+
 </script>
 
 </body>
