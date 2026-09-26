@@ -3,13 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zolo - NEET Preparation</title>
+  <title>Zolo | NEET Preparation</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <h1>Welcome to Zolo</h1>
-  <p>NEET Preparation Ecosystem</p>
 
-  <button>Start Test</button>
+  <header class="navbar">
+    <div class="logo">zolo</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Tests</a>
+      <a href="#">Results</a>
+      <a href="#">Login</a>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <div class="hero-content">
+      <p class="tagline">NEET Examination Ecosystem</p>
+      <h1>Prepare smarter.<br>Perform better.</h1>
+      <p class="description">
+        Practice NEET questions, take dynamic tests and track your preparation.
+      </p>
+
+      <div class="actions">
+        <button onclick="startTest()">Start Free Test</button>
+        <button class="secondary">Create Account</button>
+      </div>
+    </div>
+  </main>
+
+  <section class="features">
+    <div>
+      <h3>Dynamic Tests</h3>
+      <p>Choose subjects, chapters and question count.</p>
+    </div>
+
+    <div>
+      <h3>NEET Pattern</h3>
+      <p>+4 for correct and -1 for incorrect answers.</p>
+    </div>
+
+    <div>
+      <h3>Analytics</h3>
+      <p>Track your test performance and progress.</p>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
