@@ -1,1 +1,84 @@
 
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zolo | My Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="index.html" class="logo">zolo</a>
+  <a href="dashboard.html">Dashboard</a>
+</header>
+
+<main class="auth-page">
+
+  <div class="auth-card">
+
+```
+<h1>My Profile 👤</h1>
+<p>Complete your NEET preparation profile.</p>
+
+<form>
+
+  <label>Profile Photo</label>
+  <input type="file" id="photo" accept="image/*">
+
+  <label>Full Name</label>
+  <input type="text" id="fullName" placeholder="Enter your full name" required>
+
+  <label>Mobile Number</label>
+  <input type="tel" id="mobile" placeholder="Enter mobile number" required>
+
+  <label>Father's Name</label>
+  <input type="text" id="fatherName" placeholder="Father's name">
+
+  <label>Mother's Name</label>
+  <input type="text" id="motherName" placeholder="Mother's name">
+
+  <label>Medium</label>
+  <select id="medium" required>
+    <option value="">Select medium</option>
+    <option value="English">English</option>
+    <option value="Hindi">Hindi</option>
+  </select>
+
+  <label>Target Year</label>
+  <select id="targetYear" required>
+    <option value="">Select target year</option>
+    <option value="NEET 2027">NEET 2027</option>
+    <option value="NEET 2028">NEET 2028</option>
+  </select>
+
+  <button type="submit">Save Profile</button>
+
+</form>
+```
+
+  </div>
+
+</main>
+
+<script>
+const savedUser = sessionStorage.getItem("zolo_user");
+
+if (!savedUser) {
+  window.location.href = "login.html";
+}
+
+document.querySelector("form").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  alert("Profile form ready 🚀");
+
+  window.location.href = "dashboard.html";
+});
+</script>
+
+</body>
+</html>
