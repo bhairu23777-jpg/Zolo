@@ -119,8 +119,32 @@
 </main>
 
 <script>
+  const options = document.querySelectorAll(".option");
+
+  options.forEach(option => {
+    option.addEventListener("click", () => {
+      const group = option.parentElement;
+
+      group.querySelectorAll(".option").forEach(item => {
+        item.classList.remove("active");
+      });
+
+      option.classList.add("active");
+    });
+  });
+
   function generateTest() {
-    alert("Test generated successfully! 🚀");
+    const subjects = document.querySelectorAll(".test-card")[0];
+    const chapters = document.querySelectorAll(".test-card")[1];
+    const questions = document.querySelectorAll(".test-card")[2];
+
+    const subject = subjects.querySelector(".active").textContent;
+    const chapter = chapters.querySelector(".active").textContent;
+    const count = questions.querySelector(".active").textContent;
+
+    alert(
+      `Test Ready 🚀\n\nSubject: ${subject}\nChapter: ${chapter}\nQuestions: ${count}`
+    );
   }
 </script>
 
