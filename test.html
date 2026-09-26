@@ -1,9 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Zolo | Test Engine</title>
+
   <link rel="stylesheet" href="css/style.css">
 
   <style>
@@ -127,6 +131,11 @@
       line-height: 1.8;
     }
 
+    .save-status {
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
     @media (max-width: 600px) {
       .test-page {
         margin: 20px auto;
@@ -146,120 +155,286 @@
       }
     }
   </style>
+
 </head>
 
 <body>
 
 <header class="navbar">
-  <div class="logo">zolo</div>
+
+<a href="index.html" class="logo">zolo</a>
+
   <nav>
     <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
     <a href="test.html">Tests</a>
   </nav>
+
 </header>
 
 <main class="test-page">
 
   <!-- GENERATOR -->
+
   <section id="generatorScreen">
 
-    <h1>Free Test Generator</h1>
-    <p class="muted">Create your custom NEET practice test.</p>
+```
+<h1>Free Test Generator</h1>
 
-    <div class="test-card">
-      <h2>1. Select Subject</h2>
-      <div class="options" data-group="subject">
-        <button class="option active" type="button">Physics</button>
-        <button class="option" type="button">Chemistry</button>
-        <button class="option" type="button">Biology</button>
-      </div>
-    </div>
+<p class="muted">
+  Create your custom NEET practice test.
+</p>
 
-    <div class="test-card">
-      <h2>2. Select Chapter</h2>
-      <div class="options" data-group="chapter">
-        <button class="option active" type="button">Full Syllabus</button>
-        <button class="option" type="button">Mechanics</button>
-        <button class="option" type="button">Thermodynamics</button>
-        <button class="option" type="button">Optics</button>
-      </div>
-    </div>
 
-    <div class="test-card">
-      <h2>3. Number of Questions</h2>
-      <div class="options" data-group="count">
-        <button class="option active" type="button" data-count="10">10</button>
-        <button class="option" type="button" data-count="30">30</button>
-        <button class="option" type="button" data-count="90">90</button>
-        <button class="option" type="button" data-count="180">180</button>
-      </div>
-    </div>
+<!-- SUBJECT -->
 
-    <button class="generate-btn" type="button" onclick="generateTest()">
-      Generate Test
+<div class="test-card">
+
+  <h2>1. Select Subject</h2>
+
+  <div class="options" data-group="subject">
+
+    <button class="option active" type="button">
+      Physics
     </button>
+
+    <button class="option" type="button">
+      Chemistry
+    </button>
+
+    <button class="option" type="button">
+      Biology
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- CHAPTER -->
+
+<div class="test-card">
+
+  <h2>2. Select Chapter</h2>
+
+  <div class="options" data-group="chapter">
+
+    <button class="option active" type="button">
+      Full Syllabus
+    </button>
+
+    <button class="option" type="button">
+      Mechanics
+    </button>
+
+    <button class="option" type="button">
+      Thermodynamics
+    </button>
+
+    <button class="option" type="button">
+      Optics
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- QUESTION COUNT -->
+
+<div class="test-card">
+
+  <h2>3. Number of Questions</h2>
+
+  <div class="options" data-group="count">
+
+    <button
+      class="option active"
+      type="button"
+      data-count="10">
+      10
+    </button>
+
+    <button
+      class="option"
+      type="button"
+      data-count="30">
+      30
+    </button>
+
+    <button
+      class="option"
+      type="button"
+      data-count="90">
+      90
+    </button>
+
+    <button
+      class="option"
+      type="button"
+      data-count="180">
+      180
+    </button>
+
+  </div>
+
+</div>
+
+
+<button
+  class="generate-btn"
+  type="button"
+  onclick="generateTest()">
+
+  Generate Test
+
+</button>
+```
 
   </section>
 
-  <!-- TEST -->
+  <!-- TEST SCREEN -->
+
   <section id="testScreen">
 
-    <div class="test-top">
-      <div class="progress" id="progress">Question 1 of 10</div>
-      <div class="timer" id="timer">15:00</div>
-    </div>
+```
+<div class="test-top">
 
-    <div class="test-card">
+  <div
+    class="progress"
+    id="progress">
+    Question 1 of 10
+  </div>
 
-      <div class="question" id="questionText"></div>
+  <div
+    class="timer"
+    id="timer">
+    15:00
+  </div>
 
-      <div id="answers"></div>
+</div>
 
-      <div class="navigation">
-        <button type="button" id="prevBtn" onclick="previousQuestion()">
-          Previous
-        </button>
 
-        <button type="button" id="nextBtn" onclick="nextQuestion()">
-          Next
-        </button>
-      </div>
+<div class="test-card">
 
-    </div>
+  <div
+    class="question"
+    id="questionText">
+  </div>
+
+
+  <div id="answers"></div>
+
+
+  <div class="navigation">
 
     <button
       type="button"
-      id="submitBtn"
-      onclick="submitTest()"
-      style="display:none;width:100%;"
-    >
-      Submit Test
+      id="prevBtn"
+      onclick="previousQuestion()">
+
+      Previous
+
     </button>
+
+
+    <button
+      type="button"
+      id="nextBtn"
+      onclick="nextQuestion()">
+
+      Next
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<button
+  type="button"
+  id="submitBtn"
+  onclick="submitTest()"
+  style="display:none;width:100%;">
+
+  Submit Test
+
+</button>
+```
 
   </section>
 
-  <!-- RESULT -->
+  <!-- RESULT SCREEN -->
+
   <section id="resultScreen">
 
-    <div class="test-card result-box">
+```
+<div class="test-card result-box">
 
-      <h1>Test Completed 🎉</h1>
+  <h1>
+    Test Completed 🎉
+  </h1>
 
-      <div class="score" id="score">0 / 40</div>
 
-      <div class="result-info">
-        <div>Correct: <strong id="correct">0</strong></div>
-        <div>Incorrect: <strong id="incorrect">0</strong></div>
-        <div>Unanswered: <strong id="unanswered">0</strong></div>
-      </div>
+  <div
+    class="score"
+    id="score">
 
-      <br>
+    0 / 40
 
-      <button type="button" onclick="location.reload()">
-        Take Another Test
-      </button>
+  </div>
 
+
+  <div class="result-info">
+
+    <div>
+      Correct:
+      <strong id="correct">0</strong>
     </div>
+
+    <div>
+      Incorrect:
+      <strong id="incorrect">0</strong>
+    </div>
+
+    <div>
+      Unanswered:
+      <strong id="unanswered">0</strong>
+    </div>
+
+  </div>
+
+
+  <div
+    class="save-status"
+    id="saveStatus">
+  </div>
+
+
+  <br>
+
+
+  <button
+    type="button"
+    onclick="location.reload()">
+
+    Take Another Test
+
+  </button>
+
+
+  <br><br>
+
+
+  <a href="dashboard.html">
+    <button type="button">
+      Back to Dashboard
+    </button>
+  </a>
+
+</div>
+```
 
   </section>
 
@@ -267,27 +442,57 @@
 
 <script>
 
+
+/* =========================
+   QUESTION BANK
+========================= */
+
 const questionBank = [
+
   {
     q: "The SI unit of force is:",
-    options: ["Joule", "Newton", "Watt", "Pascal"],
+    options: [
+      "Joule",
+      "Newton",
+      "Watt",
+      "Pascal"
+    ],
     answer: 1
   },
+
   {
     q: "Which quantity is a vector?",
-    options: ["Speed", "Distance", "Velocity", "Mass"],
+    options: [
+      "Speed",
+      "Distance",
+      "Velocity",
+      "Mass"
+    ],
     answer: 2
   },
+
   {
     q: "Acceleration due to gravity near Earth's surface is approximately:",
-    options: ["4.8 m/s²", "9.8 m/s²", "19.6 m/s²", "98 m/s²"],
+    options: [
+      "4.8 m/s²",
+      "9.8 m/s²",
+      "19.6 m/s²",
+      "98 m/s²"
+    ],
     answer: 1
   },
+
   {
     q: "The SI unit of work is:",
-    options: ["Newton", "Watt", "Joule", "Pascal"],
+    options: [
+      "Newton",
+      "Watt",
+      "Joule",
+      "Pascal"
+    ],
     answer: 2
   },
+
   {
     q: "Which law explains action and reaction?",
     options: [
@@ -298,6 +503,7 @@ const questionBank = [
     ],
     answer: 2
   },
+
   {
     q: "The speed of light in vacuum is approximately:",
     options: [
@@ -308,227 +514,680 @@ const questionBank = [
     ],
     answer: 1
   },
+
   {
     q: "Which particle has a negative charge?",
-    options: ["Proton", "Neutron", "Electron", "Photon"],
+    options: [
+      "Proton",
+      "Neutron",
+      "Electron",
+      "Photon"
+    ],
     answer: 2
   },
+
   {
     q: "Ohm's law is represented by:",
-    options: ["V = IR", "P = VI", "F = ma", "Q = It"],
+    options: [
+      "V = IR",
+      "P = VI",
+      "F = ma",
+      "Q = It"
+    ],
     answer: 0
   },
+
   {
     q: "The unit of electric current is:",
-    options: ["Volt", "Ampere", "Ohm", "Coulomb"],
+    options: [
+      "Volt",
+      "Ampere",
+      "Ohm",
+      "Coulomb"
+    ],
     answer: 1
   },
+
   {
     q: "Which one is a scalar quantity?",
-    options: ["Velocity", "Acceleration", "Force", "Temperature"],
+    options: [
+      "Velocity",
+      "Acceleration",
+      "Force",
+      "Temperature"
+    ],
     answer: 3
   }
+
 ];
 
+
+
+/* =========================
+   VARIABLES
+========================= */
+
 let questions = [];
+
 let currentQuestion = 0;
+
 let selectedAnswers = [];
+
 let timeLeft = 900;
+
 let timerInterval = null;
 
-const generatorScreen = document.getElementById("generatorScreen");
-const testScreen = document.getElementById("testScreen");
-const resultScreen = document.getElementById("resultScreen");
+let testSubmitted = false;
 
-document.querySelectorAll(".options").forEach(group => {
 
-  group.querySelectorAll(".option").forEach(button => {
 
-    button.addEventListener("click", () => {
+/* =========================
+   ELEMENTS
+========================= */
 
-      group.querySelectorAll(".option").forEach(item => {
-        item.classList.remove("active");
+const generatorScreen =
+  document.getElementById("generatorScreen");
+
+const testScreen =
+  document.getElementById("testScreen");
+
+const resultScreen =
+  document.getElementById("resultScreen");
+
+
+
+/* =========================
+   OPTION SELECTION
+========================= */
+
+document
+  .querySelectorAll(".options")
+  .forEach(group => {
+
+    group
+      .querySelectorAll(".option")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            group
+              .querySelectorAll(".option")
+              .forEach(item => {
+
+                item.classList.remove(
+                  "active"
+                );
+
+              });
+
+            button.classList.add(
+              "active"
+            );
+
+          }
+        );
+
       });
-
-      button.classList.add("active");
-
-    });
 
   });
 
-});
+
+
+/* =========================
+   GENERATE TEST
+========================= */
 
 function generateTest() {
 
   const countButton =
-    document.querySelector('[data-group="count"] .active');
+    document.querySelector(
+      '[data-group="count"] .active'
+    );
 
-  const count = Number(countButton.dataset.count);
+  const count =
+    Number(countButton.dataset.count);
+
 
   questions = [];
 
-  for (let i = 0; i < count; i++) {
-    questions.push(questionBank[i % questionBank.length]);
+
+  for (
+    let i = 0;
+    i < count;
+    i++
+  ) {
+
+    questions.push(
+      questionBank[
+        i % questionBank.length
+      ]
+    );
+
   }
 
-  selectedAnswers = new Array(questions.length).fill(null);
 
-  generatorScreen.style.display = "none";
-  testScreen.style.display = "block";
+  selectedAnswers =
+    new Array(
+      questions.length
+    ).fill(null);
 
-  timeLeft = Math.max(60, questions.length * 90);
+
+  generatorScreen.style.display =
+    "none";
+
+  testScreen.style.display =
+    "block";
+
+
+  timeLeft =
+    Math.max(
+      60,
+      questions.length * 90
+    );
+
 
   currentQuestion = 0;
 
+
   startTimer();
+
   renderQuestion();
+
 }
+
+
+
+/* =========================
+   RENDER QUESTION
+========================= */
 
 function renderQuestion() {
 
-  const question = questions[currentQuestion];
+  const question =
+    questions[currentQuestion];
 
-  document.getElementById("progress").textContent =
+
+  document.getElementById(
+    "progress"
+  ).textContent =
     `Question ${currentQuestion + 1} of ${questions.length}`;
 
-  document.getElementById("questionText").textContent =
+
+  document.getElementById(
+    "questionText"
+  ).textContent =
     question.q;
 
-  const answers = document.getElementById("answers");
+
+  const answers =
+    document.getElementById(
+      "answers"
+    );
+
 
   answers.innerHTML = "";
 
-  question.options.forEach((option, index) => {
 
-    const button = document.createElement("button");
+  question.options.forEach(
+    (option, index) => {
 
-    button.type = "button";
-    button.className = "answer";
-    button.textContent =
-      `${String.fromCharCode(65 + index)}. ${option}`;
+      const button =
+        document.createElement(
+          "button"
+        );
 
-    if (selectedAnswers[currentQuestion] === index) {
-      button.classList.add("selected");
+
+      button.type =
+        "button";
+
+      button.className =
+        "answer";
+
+      button.textContent =
+        `${String.fromCharCode(65 + index)}. ${option}`;
+
+
+      if (
+        selectedAnswers[
+          currentQuestion
+        ] === index
+      ) {
+
+        button.classList.add(
+          "selected"
+        );
+
+      }
+
+
+      button.onclick = () => {
+
+        selectedAnswers[
+          currentQuestion
+        ] = index;
+
+
+        document
+          .querySelectorAll(
+            ".answer"
+          )
+          .forEach(item => {
+
+            item.classList.remove(
+              "selected"
+            );
+
+          });
+
+
+        button.classList.add(
+          "selected"
+        );
+
+      };
+
+
+      answers.appendChild(
+        button
+      );
+
     }
+  );
 
-    button.onclick = () => {
 
-      selectedAnswers[currentQuestion] = index;
-
-      document
-        .querySelectorAll(".answer")
-        .forEach(item => item.classList.remove("selected"));
-
-      button.classList.add("selected");
-
-    };
-
-    answers.appendChild(button);
-
-  });
-
-  document.getElementById("prevBtn").disabled =
+  document.getElementById(
+    "prevBtn"
+  ).disabled =
     currentQuestion === 0;
 
+
   const lastQuestion =
-    currentQuestion === questions.length - 1;
+    currentQuestion ===
+    questions.length - 1;
 
-  document.getElementById("nextBtn").style.display =
-    lastQuestion ? "none" : "block";
 
-  document.getElementById("submitBtn").style.display =
-    lastQuestion ? "block" : "none";
+  document.getElementById(
+    "nextBtn"
+  ).style.display =
+    lastQuestion
+      ? "none"
+      : "block";
+
+
+  document.getElementById(
+    "submitBtn"
+  ).style.display =
+    lastQuestion
+      ? "block"
+      : "none";
+
 }
+
+
+
+/* =========================
+   NEXT QUESTION
+========================= */
 
 function nextQuestion() {
 
-  if (currentQuestion < questions.length - 1) {
+  if (
+    currentQuestion <
+    questions.length - 1
+  ) {
+
     currentQuestion++;
+
     renderQuestion();
+
   }
 
 }
+
+
+
+/* =========================
+   PREVIOUS QUESTION
+========================= */
 
 function previousQuestion() {
 
-  if (currentQuestion > 0) {
+  if (
+    currentQuestion > 0
+  ) {
+
     currentQuestion--;
+
     renderQuestion();
+
   }
 
 }
 
+
+
+/* =========================
+   TIMER
+========================= */
+
 function startTimer() {
 
-  clearInterval(timerInterval);
+  clearInterval(
+    timerInterval
+  );
+
 
   updateTimer();
 
-  timerInterval = setInterval(() => {
 
-    timeLeft--;
+  timerInterval =
+    setInterval(() => {
 
-    updateTimer();
+      timeLeft--;
 
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      submitTest();
-    }
+      updateTimer();
 
-  }, 1000);
+
+      if (
+        timeLeft <= 0
+      ) {
+
+        clearInterval(
+          timerInterval
+        );
+
+        submitTest();
+
+      }
+
+    }, 1000);
 
 }
+
+
 
 function updateTimer() {
 
   const minutes =
-    Math.floor(timeLeft / 60);
+    Math.floor(
+      timeLeft / 60
+    );
+
 
   const seconds =
     timeLeft % 60;
 
-  document.getElementById("timer").textContent =
+
+  document.getElementById(
+    "timer"
+  ).textContent =
     `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 
 }
 
-function submitTest() {
 
-  clearInterval(timerInterval);
+
+/* =========================
+   SUBMIT TEST
+========================= */
+
+async function submitTest() {
+
+  if (testSubmitted) {
+    return;
+  }
+
+  testSubmitted = true;
+
+
+  clearInterval(
+    timerInterval
+  );
+
 
   let correct = 0;
+
   let incorrect = 0;
+
   let unanswered = 0;
 
-  questions.forEach((question, index) => {
 
-    const selected = selectedAnswers[index];
+  questions.forEach(
+    (question, index) => {
 
-    if (selected === null) {
-      unanswered++;
-    } else if (selected === question.answer) {
-      correct++;
-    } else {
-      incorrect++;
+      const selected =
+        selectedAnswers[index];
+
+
+      if (
+        selected === null
+      ) {
+
+        unanswered++;
+
+      }
+
+      else if (
+        selected ===
+        question.answer
+      ) {
+
+        correct++;
+
+      }
+
+      else {
+
+        incorrect++;
+
+      }
+
+    }
+  );
+
+
+  const score =
+    (correct * 4) -
+    (incorrect * 1);
+
+
+  /*
+    Check login
+  */
+
+  const savedUser =
+    sessionStorage.getItem(
+      "zolo_user"
+    );
+
+
+  if (!savedUser) {
+
+    alert(
+      "Please login first."
+    );
+
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  let user;
+
+
+  try {
+
+    user =
+      JSON.parse(
+        savedUser
+      );
+
+  }
+
+  catch (error) {
+
+    sessionStorage.removeItem(
+      "zolo_user"
+    );
+
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  /*
+    Selected subject
+  */
+
+  const subjectButton =
+    document.querySelector(
+      '[data-group="subject"] .active'
+    );
+
+
+  const subject =
+    subjectButton
+      ? subjectButton.textContent.trim()
+      : "Physics";
+
+
+  /*
+    Save result
+  */
+
+  const saveStatus =
+    document.getElementById(
+      "saveStatus"
+    );
+
+
+  saveStatus.textContent =
+    "Saving result...";
+
+
+  try {
+
+    const response =
+      await fetch(
+        "https://zolo-st8s.onrender.com/api/results",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+
+            user_id:
+              user.id,
+
+            subject:
+              subject,
+
+            total_questions:
+              questions.length,
+
+            attempted:
+              correct + incorrect,
+
+            correct:
+              correct,
+
+            wrong:
+              incorrect,
+
+            score:
+              score
+
+          })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok ||
+        !data.success) {
+
+      saveStatus.textContent =
+        "Result save nahi ho paya.";
+
+      testSubmitted = false;
+
+      return;
+
     }
 
-  });
 
-  const score = (correct * 4) - (incorrect * 1);
+    saveStatus.textContent =
+      "Result saved successfully ✅";
 
-  testScreen.style.display = "none";
-  resultScreen.style.display = "block";
 
-  document.getElementById("score").textContent =
+  }
+
+  catch (error) {
+
+    console.error(
+      "Result API error:",
+      error
+    );
+
+
+    saveStatus.textContent =
+      "Server se connection nahi ho pa raha.";
+
+    testSubmitted = false;
+
+    return;
+
+  }
+
+
+  /*
+    Show result
+  */
+
+  testScreen.style.display =
+    "none";
+
+  resultScreen.style.display =
+    "block";
+
+
+  document.getElementById(
+    "score"
+  ).textContent =
     `${score} / ${questions.length * 4}`;
 
-  document.getElementById("correct").textContent =
+
+  document.getElementById(
+    "correct"
+  ).textContent =
     correct;
 
-  document.getElementById("incorrect").textContent =
+
+  document.getElementById(
+    "incorrect"
+  ).textContent =
     incorrect;
 
-  document.getElementById("unanswered").textContent =
+
+  document.getElementById(
+    "unanswered"
+  ).textContent =
     unanswered;
 
 }
@@ -536,4 +1195,5 @@ function submitTest() {
 </script>
 
 </body>
+
 </html>
