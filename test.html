@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Zolo | Test Engine</title>
-
   <link rel="stylesheet" href="css/style.css">
 
   <style>
@@ -83,6 +80,10 @@
       font-size: 20px;
     }
 
+    .timer.warning {
+      color: #dc2626;
+    }
+
     .progress {
       color: #667085;
     }
@@ -103,6 +104,10 @@
       margin-bottom: 12px;
     }
 
+    .answer:hover {
+      border-color: #172033;
+    }
+
     .answer.selected {
       background: #172033;
       color: white;
@@ -113,6 +118,13 @@
       justify-content: space-between;
       gap: 12px;
       margin-top: 25px;
+    }
+
+    .submit-test-btn {
+      width: 100%;
+      margin-top: 15px;
+      background: #dc2626;
+      color: white;
     }
 
     .result-box {
@@ -129,11 +141,17 @@
     .result-info {
       color: #667085;
       line-height: 1.8;
+      font-size: 18px;
     }
 
     .save-status {
-      margin-top: 15px;
-      font-weight: 600;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #667085;
+    }
+
+    .back-dashboard {
+      margin-top: 12px;
     }
 
     @media (max-width: 600px) {
@@ -153,6 +171,10 @@
       .navigation {
         flex-direction: column;
       }
+
+      .score {
+        font-size: 46px;
+      }
     }
   </style>
 
@@ -161,20 +183,20 @@
 <body>
 
 <header class="navbar">
-
-<a href="index.html" class="logo">zolo</a>
+  <a href="index.html" class="logo">zolo</a>
 
   <nav>
     <a href="index.html">Home</a>
-    <a href="dashboard.html">Dashboard</a>
     <a href="test.html">Tests</a>
+    <a href="dashboard.html">Dashboard</a>
   </nav>
-
 </header>
 
 <main class="test-page">
 
-  <!-- GENERATOR -->
+  <!-- =========================
+       GENERATOR SCREEN
+  ========================== -->
 
   <section id="generatorScreen">
 
@@ -185,7 +207,6 @@
   Create your custom NEET practice test.
 </p>
 
-
 <!-- SUBJECT -->
 
 <div class="test-card">
@@ -194,22 +215,33 @@
 
   <div class="options" data-group="subject">
 
-    <button class="option active" type="button">
+    <button
+      class="option active"
+      type="button"
+      data-value="Physics"
+    >
       Physics
     </button>
 
-    <button class="option" type="button">
+    <button
+      class="option"
+      type="button"
+      data-value="Chemistry"
+    >
       Chemistry
     </button>
 
-    <button class="option" type="button">
+    <button
+      class="option"
+      type="button"
+      data-value="Biology"
+    >
       Biology
     </button>
 
   </div>
 
 </div>
-
 
 <!-- CHAPTER -->
 
@@ -219,26 +251,41 @@
 
   <div class="options" data-group="chapter">
 
-    <button class="option active" type="button">
+    <button
+      class="option active"
+      type="button"
+      data-value="Full Syllabus"
+    >
       Full Syllabus
     </button>
 
-    <button class="option" type="button">
+    <button
+      class="option"
+      type="button"
+      data-value="Mechanics"
+    >
       Mechanics
     </button>
 
-    <button class="option" type="button">
+    <button
+      class="option"
+      type="button"
+      data-value="Thermodynamics"
+    >
       Thermodynamics
     </button>
 
-    <button class="option" type="button">
+    <button
+      class="option"
+      type="button"
+      data-value="Optics"
+    >
       Optics
     </button>
 
   </div>
 
 </div>
-
 
 <!-- QUESTION COUNT -->
 
@@ -251,28 +298,32 @@
     <button
       class="option active"
       type="button"
-      data-count="10">
+      data-count="10"
+    >
       10
     </button>
 
     <button
       class="option"
       type="button"
-      data-count="30">
+      data-count="30"
+    >
       30
     </button>
 
     <button
       class="option"
       type="button"
-      data-count="90">
+      data-count="90"
+    >
       90
     </button>
 
     <button
       class="option"
       type="button"
-      data-count="180">
+      data-count="180"
+    >
       180
     </button>
 
@@ -280,20 +331,20 @@
 
 </div>
 
-
 <button
   class="generate-btn"
   type="button"
-  onclick="generateTest()">
-
+  onclick="generateTest()"
+>
   Generate Test
-
 </button>
 ```
 
   </section>
 
-  <!-- TEST SCREEN -->
+  <!-- =========================
+       TEST SCREEN
+  ========================== -->
 
   <section id="testScreen">
 
@@ -302,13 +353,15 @@
 
   <div
     class="progress"
-    id="progress">
+    id="progress"
+  >
     Question 1 of 10
   </div>
 
   <div
     class="timer"
-    id="timer">
+    id="timer"
+  >
     15:00
   </div>
 
@@ -319,9 +372,8 @@
 
   <div
     class="question"
-    id="questionText">
-  </div>
-
+    id="questionText"
+  ></div>
 
   <div id="answers"></div>
 
@@ -331,20 +383,17 @@
     <button
       type="button"
       id="prevBtn"
-      onclick="previousQuestion()">
-
+      onclick="previousQuestion()"
+    >
       Previous
-
     </button>
-
 
     <button
       type="button"
       id="nextBtn"
-      onclick="nextQuestion()">
-
+      onclick="nextQuestion()"
+    >
       Next
-
     </button>
 
   </div>
@@ -355,36 +404,32 @@
 <button
   type="button"
   id="submitBtn"
+  class="submit-test-btn"
   onclick="submitTest()"
-  style="display:none;width:100%;">
-
+>
   Submit Test
-
 </button>
 ```
 
   </section>
 
-  <!-- RESULT SCREEN -->
+  <!-- =========================
+       RESULT SCREEN
+  ========================== -->
 
   <section id="resultScreen">
 
 ```
 <div class="test-card result-box">
 
-  <h1>
-    Test Completed 🎉
-  </h1>
-
+  <h1>Test Completed 🎉</h1>
 
   <div
     class="score"
-    id="score">
-
+    id="score"
+  >
     0 / 40
-
   </div>
-
 
   <div class="result-info">
 
@@ -403,35 +448,38 @@
       <strong id="unanswered">0</strong>
     </div>
 
-  </div>
+    <div>
+      Attempted:
+      <strong id="attempted">0</strong>
+    </div>
 
+  </div>
 
   <div
     class="save-status"
-    id="saveStatus">
+    id="saveStatus"
+  >
+    Saving result...
   </div>
-
 
   <br>
 
+  <button
+    type="button"
+    onclick="location.reload()"
+  >
+    Take Another Test
+  </button>
+
+  <br>
 
   <button
     type="button"
-    onclick="location.reload()">
-
-    Take Another Test
-
+    class="back-dashboard"
+    onclick="window.location.href='dashboard.html'"
+  >
+    Back to Dashboard
   </button>
-
-
-  <br><br>
-
-
-  <a href="dashboard.html">
-    <button type="button">
-      Back to Dashboard
-    </button>
-  </a>
 
 </div>
 ```
@@ -442,10 +490,17 @@
 
 <script>
 
+/* ==========================================
+   CONFIG
+========================================== */
 
-/* =========================
+const API_URL =
+  "https://zolo-st8s.onrender.com";
+
+
+/* ==========================================
    QUESTION BANK
-========================= */
+========================================== */
 
 const questionBank = [
 
@@ -562,10 +617,9 @@ const questionBank = [
 ];
 
 
-
-/* =========================
-   VARIABLES
-========================= */
+/* ==========================================
+   STATE
+========================================== */
 
 let questions = [];
 
@@ -579,11 +633,16 @@ let timerInterval = null;
 
 let testSubmitted = false;
 
+let selectedSubject = "Physics";
+
+let selectedChapter = "Full Syllabus";
+
+let selectedCount = 10;
 
 
-/* =========================
-   ELEMENTS
-========================= */
+/* ==========================================
+   DOM
+========================================== */
 
 const generatorScreen =
   document.getElementById("generatorScreen");
@@ -595,10 +654,9 @@ const resultScreen =
   document.getElementById("resultScreen");
 
 
-
-/* =========================
+/* ==========================================
    OPTION SELECTION
-========================= */
+========================================== */
 
 document
   .querySelectorAll(".options")
@@ -615,16 +673,10 @@ document
             group
               .querySelectorAll(".option")
               .forEach(item => {
-
-                item.classList.remove(
-                  "active"
-                );
-
+                item.classList.remove("active");
               });
 
-            button.classList.add(
-              "active"
-            );
+            button.classList.add("active");
 
           }
         );
@@ -634,28 +686,56 @@ document
   });
 
 
-
-/* =========================
+/* ==========================================
    GENERATE TEST
-========================= */
+========================================== */
 
 function generateTest() {
+
+  const subjectButton =
+    document.querySelector(
+      '[data-group="subject"] .active'
+    );
+
+  const chapterButton =
+    document.querySelector(
+      '[data-group="chapter"] .active'
+    );
 
   const countButton =
     document.querySelector(
       '[data-group="count"] .active'
     );
 
-  const count =
-    Number(countButton.dataset.count);
+
+  selectedSubject =
+    subjectButton?.dataset.value ||
+    subjectButton?.textContent.trim() ||
+    "Physics";
+
+
+  selectedChapter =
+    chapterButton?.dataset.value ||
+    chapterButton?.textContent.trim() ||
+    "Full Syllabus";
+
+
+  selectedCount =
+    Number(countButton?.dataset.count || 10);
 
 
   questions = [];
 
 
+  /*
+    Temporary question bank behavior:
+    Until the real database question bank is connected,
+    questions repeat when count > available questions.
+  */
+
   for (
     let i = 0;
-    i < count;
+    i < selectedCount;
     i++
   ) {
 
@@ -669,17 +749,18 @@ function generateTest() {
 
 
   selectedAnswers =
-    new Array(
-      questions.length
-    ).fill(null);
+    new Array(questions.length).fill(null);
 
 
-  generatorScreen.style.display =
-    "none";
+  currentQuestion = 0;
 
-  testScreen.style.display =
-    "block";
+  testSubmitted = false;
 
+
+  /*
+    90 seconds per question.
+    Minimum 60 seconds.
+  */
 
   timeLeft =
     Math.max(
@@ -688,7 +769,14 @@ function generateTest() {
     );
 
 
-  currentQuestion = 0;
+  generatorScreen.style.display =
+    "none";
+
+  resultScreen.style.display =
+    "none";
+
+  testScreen.style.display =
+    "block";
 
 
   startTimer();
@@ -698,12 +786,16 @@ function generateTest() {
 }
 
 
-
-/* =========================
+/* ==========================================
    RENDER QUESTION
-========================= */
+========================================== */
 
 function renderQuestion() {
+
+  if (!questions.length) {
+    return;
+  }
+
 
   const question =
     questions[currentQuestion];
@@ -722,9 +814,7 @@ function renderQuestion() {
 
 
   const answers =
-    document.getElementById(
-      "answers"
-    );
+    document.getElementById("answers");
 
 
   answers.innerHTML = "";
@@ -734,25 +824,22 @@ function renderQuestion() {
     (option, index) => {
 
       const button =
-        document.createElement(
-          "button"
-        );
+        document.createElement("button");
 
 
-      button.type =
-        "button";
+      button.type = "button";
 
       button.className =
         "answer";
+
 
       button.textContent =
         `${String.fromCharCode(65 + index)}. ${option}`;
 
 
       if (
-        selectedAnswers[
-          currentQuestion
-        ] === index
+        selectedAnswers[currentQuestion] ===
+        index
       ) {
 
         button.classList.add(
@@ -770,9 +857,7 @@ function renderQuestion() {
 
 
         document
-          .querySelectorAll(
-            ".answer"
-          )
+          .querySelectorAll(".answer")
           .forEach(item => {
 
             item.classList.remove(
@@ -789,17 +874,20 @@ function renderQuestion() {
       };
 
 
-      answers.appendChild(
-        button
-      );
+      answers.appendChild(button);
 
     }
   );
 
 
-  document.getElementById(
-    "prevBtn"
-  ).disabled =
+  const prevBtn =
+    document.getElementById("prevBtn");
+
+  const nextBtn =
+    document.getElementById("nextBtn");
+
+
+  prevBtn.disabled =
     currentQuestion === 0;
 
 
@@ -808,28 +896,33 @@ function renderQuestion() {
     questions.length - 1;
 
 
-  document.getElementById(
-    "nextBtn"
-  ).style.display =
+  /*
+    Next button disappears on last question.
+  */
+
+  nextBtn.style.display =
     lastQuestion
       ? "none"
       : "block";
 
 
+  /*
+    Submit button ALWAYS remains available.
+    This fixes the situation where user cannot
+    find Submit.
+  */
+
   document.getElementById(
     "submitBtn"
   ).style.display =
-    lastQuestion
-      ? "block"
-      : "none";
+    "block";
 
 }
 
 
-
-/* =========================
-   NEXT QUESTION
-========================= */
+/* ==========================================
+   NEXT
+========================================== */
 
 function nextQuestion() {
 
@@ -847,10 +940,9 @@ function nextQuestion() {
 }
 
 
-
-/* =========================
-   PREVIOUS QUESTION
-========================= */
+/* ==========================================
+   PREVIOUS
+========================================== */
 
 function previousQuestion() {
 
@@ -867,10 +959,9 @@ function previousQuestion() {
 }
 
 
-
-/* =========================
+/* ==========================================
    TIMER
-========================= */
+========================================== */
 
 function startTimer() {
 
@@ -885,20 +976,29 @@ function startTimer() {
   timerInterval =
     setInterval(() => {
 
-      timeLeft--;
-
-      updateTimer();
-
-
-      if (
-        timeLeft <= 0
-      ) {
+      if (testSubmitted) {
 
         clearInterval(
           timerInterval
         );
 
-        submitTest();
+        return;
+
+      }
+
+
+      timeLeft--;
+
+      updateTimer();
+
+
+      if (timeLeft <= 0) {
+
+        clearInterval(
+          timerInterval
+        );
+
+        submitTest(true);
 
       }
 
@@ -907,8 +1007,15 @@ function startTimer() {
 }
 
 
+/* ==========================================
+   UPDATE TIMER
+========================================== */
 
 function updateTimer() {
+
+  const timer =
+    document.getElementById("timer");
+
 
   const minutes =
     Math.floor(
@@ -920,24 +1027,41 @@ function updateTimer() {
     timeLeft % 60;
 
 
-  document.getElementById(
-    "timer"
-  ).textContent =
+  timer.textContent =
     `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+
+  if (timeLeft <= 60) {
+
+    timer.classList.add(
+      "warning"
+    );
+
+  } else {
+
+    timer.classList.remove(
+      "warning"
+    );
+
+  }
 
 }
 
 
-
-/* =========================
+/* ==========================================
    SUBMIT TEST
-========================= */
+========================================== */
 
-async function submitTest() {
+async function submitTest(autoSubmitted = false) {
+
+  /*
+    Prevent double submission.
+  */
 
   if (testSubmitted) {
     return;
   }
+
 
   testSubmitted = true;
 
@@ -962,7 +1086,8 @@ async function submitTest() {
 
 
       if (
-        selected === null
+        selected === null ||
+        selected === undefined
       ) {
 
         unanswered++;
@@ -970,8 +1095,7 @@ async function submitTest() {
       }
 
       else if (
-        selected ===
-        question.answer
+        selected === question.answer
       ) {
 
         correct++;
@@ -988,179 +1112,31 @@ async function submitTest() {
   );
 
 
+  const attempted =
+    correct + incorrect;
+
+
+  /*
+    NEET-style marking:
+    Correct = +4
+    Wrong = -1
+    Unanswered = 0
+  */
+
   const score =
     (correct * 4) -
-    (incorrect * 1);
+    incorrect;
 
 
   /*
-    Check login
-  */
-
-  const savedUser =
-    sessionStorage.getItem(
-      "zolo_user"
-    );
-
-
-  if (!savedUser) {
-
-    alert(
-      "Please login first."
-    );
-
-    window.location.href =
-      "login.html";
-
-    return;
-
-  }
-
-
-  let user;
-
-
-  try {
-
-    user =
-      JSON.parse(
-        savedUser
-      );
-
-  }
-
-  catch (error) {
-
-    sessionStorage.removeItem(
-      "zolo_user"
-    );
-
-    window.location.href =
-      "login.html";
-
-    return;
-
-  }
-
-
-  /*
-    Selected subject
-  */
-
-  const subjectButton =
-    document.querySelector(
-      '[data-group="subject"] .active'
-    );
-
-
-  const subject =
-    subjectButton
-      ? subjectButton.textContent.trim()
-      : "Physics";
-
-
-  /*
-    Save result
-  */
-
-  const saveStatus =
-    document.getElementById(
-      "saveStatus"
-    );
-
-
-  saveStatus.textContent =
-    "Saving result...";
-
-
-  try {
-
-    const response =
-      await fetch(
-        "https://zolo-st8s.onrender.com/api/results",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-
-            user_id:
-              user.id,
-
-            subject:
-              subject,
-
-            total_questions:
-              questions.length,
-
-            attempted:
-              correct + incorrect,
-
-            correct:
-              correct,
-
-            wrong:
-              incorrect,
-
-            score:
-              score
-
-          })
-
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (!response.ok ||
-        !data.success) {
-
-      saveStatus.textContent =
-        "Result save nahi ho paya.";
-
-      testSubmitted = false;
-
-      return;
-
-    }
-
-
-    saveStatus.textContent =
-      "Result saved successfully ✅";
-
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "Result API error:",
-      error
-    );
-
-
-    saveStatus.textContent =
-      "Server se connection nahi ho pa raha.";
-
-    testSubmitted = false;
-
-    return;
-
-  }
-
-
-  /*
-    Show result
+    SHOW RESULT IMMEDIATELY.
+    API should NEVER block the result screen.
   */
 
   testScreen.style.display =
+    "none";
+
+  generatorScreen.style.display =
     "none";
 
   resultScreen.style.display =
@@ -1190,10 +1166,206 @@ async function submitTest() {
   ).textContent =
     unanswered;
 
+
+  document.getElementById(
+    "attempted"
+  ).textContent =
+    attempted;
+
+
+  const saveStatus =
+    document.getElementById(
+      "saveStatus"
+    );
+
+
+  if (autoSubmitted) {
+
+    saveStatus.textContent =
+      "⏰ Time finished. Result calculated.";
+
+  } else {
+
+    saveStatus.textContent =
+      "Saving result...";
+
+  }
+
+
+  /*
+    Get logged-in user.
+  */
+
+  const savedUser =
+    sessionStorage.getItem(
+      "zolo_user"
+    );
+
+
+  /*
+    If user is not logged in,
+    result still remains visible.
+  */
+
+  if (!savedUser) {
+
+    saveStatus.textContent =
+      "Result calculated. Login to save your result.";
+
+    return;
+
+  }
+
+
+  let user;
+
+
+  try {
+
+    user =
+      JSON.parse(savedUser);
+
+  } catch (error) {
+
+    console.error(
+      "User data error:",
+      error
+    );
+
+
+    saveStatus.textContent =
+      "Result calculated, but account data could not be read.";
+
+    return;
+
+  }
+
+
+  if (!user.id) {
+
+    saveStatus.textContent =
+      "Result calculated. User ID missing, so result was not saved.";
+
+    return;
+
+  }
+
+
+  /*
+    SAVE RESULT TO BACKEND
+  */
+
+  try {
+
+    const response =
+      await fetch(
+        `${API_URL}/api/results`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+
+            user_id:
+              user.id,
+
+            subject:
+              selectedSubject,
+
+            total_questions:
+              questions.length,
+
+            attempted:
+              attempted,
+
+            correct:
+              correct,
+
+            wrong:
+              incorrect,
+
+            score:
+              score
+
+          })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      response.ok &&
+      data.success
+    ) {
+
+      saveStatus.textContent =
+        "✅ Result saved successfully.";
+
+    } else {
+
+      saveStatus.textContent =
+        "Result calculated, but server could not save it.";
+
+      console.error(
+        "Result API error:",
+        data
+      );
+
+    }
+
+  } catch (error) {
+
+    /*
+      IMPORTANT:
+      API failure must NOT hide result.
+    */
+
+    console.error(
+      "Result save error:",
+      error
+    );
+
+
+    saveStatus.textContent =
+      "Result calculated. Server connection failed, so it was not saved.";
+
+  }
+
 }
+
+
+/* ==========================================
+   PAGE SAFETY
+========================================== */
+
+window.addEventListener(
+  "beforeunload",
+  event => {
+
+    if (
+      testScreen.style.display ===
+      "block" &&
+      !testSubmitted
+    ) {
+
+      event.preventDefault();
+
+      event.returnValue = "";
+
+    }
+
+  }
+);
 
 </script>
 
 </body>
-
 </html>
