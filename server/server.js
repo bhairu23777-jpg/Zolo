@@ -242,6 +242,71 @@ res.status(500).json({
 
 }
 });
+// Save / Update Student Profile
+app.post("/api/profile", async (req, res) => {
+  try {
+
+    const {
+      user_id,
+      father_name,
+      mother_name,
+      medium,
+      target_year
+    } = req.body;
+
+    if (!user_id) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID is required"
+      });
+    }
+
+    const result = await pool.query(
+      `
+      INSERT INTO student_profiles
+      (
+        user_id,
+        father_name,
+        mother_name,
+        medium,
+        target_year
+      )
+      VALUES ($1, $2, $3, $4, $5)
+      ON CONFLICT (user_id)
+      DO UPDATE SET
+        father_name = EXCLUDED.father_name,
+        mother_name = EXCLUDED.mother_name,
+        medium = EXCLUDED.medium,
+        target_year = EXCLUDED.target_year,
+        updated_at = CURRENT_TIMESTAMP
+      RETURNING *
+      `,
+      [
+        user_id,
+        father_name || null,
+        mother_name || null,
+        medium || null,
+        target_year || null
+      ]
+    );
+
+    res.json({
+      success: true,
+      message: "Profile saved successfully 🎉",
+      profile: result.rows[0]
+    });
+
+  } catch (error) {
+
+    console.error("Profile save error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Profile save failed"
+    });
+
+  }
+});
 
 // Server
 const PORT = process.env.PORT || 3000;
