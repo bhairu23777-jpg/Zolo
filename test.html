@@ -1,1 +1,128 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zolo | Test Generator</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .test-page {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    .test-page h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .test-page > p {
+      color: #667085;
+      margin-bottom: 35px;
+    }
+
+    .test-card {
+      background: white;
+      border: 1px solid #e8ebf0;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .test-card h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .option {
+      border: 1px solid #d9dee8;
+      background: #fff;
+      color: #172033;
+      padding: 13px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .option.active {
+      background: #172033;
+      color: white;
+    }
+
+    .generate-btn {
+      width: 100%;
+      margin-top: 10px;
+      font-size: 17px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">zolo</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="test.html">Tests</a>
+  </nav>
+</header>
+
+<main class="test-page">
+
+  <h1>Free Test Generator</h1>
+  <p>Create a custom NEET practice test.</p>
+
+  <div class="test-card">
+    <h2>1. Select Subject</h2>
+
+    <div class="options">
+      <button class="option active">Physics</button>
+      <button class="option">Chemistry</button>
+      <button class="option">Biology</button>
+    </div>
+  </div>
+
+  <div class="test-card">
+    <h2>2. Select Chapter</h2>
+
+    <div class="options">
+      <button class="option active">Full Syllabus</button>
+      <button class="option">Mechanics</button>
+      <button class="option">Thermodynamics</button>
+      <button class="option">Optics</button>
+    </div>
+  </div>
+
+  <div class="test-card">
+    <h2>3. Number of Questions</h2>
+
+    <div class="options">
+      <button class="option active">10</button>
+      <button class="option">30</button>
+      <button class="option">90</button>
+      <button class="option">180</button>
+    </div>
+  </div>
+
+  <button class="generate-btn" onclick="generateTest()">
+    Generate Test
+  </button>
+
+</main>
+
+<script>
+  function generateTest() {
+    alert("Test generated successfully! 🚀");
+  }
+</script>
+
+</body>
+</html>
