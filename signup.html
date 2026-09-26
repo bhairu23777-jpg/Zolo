@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,17 +23,38 @@
 
     <form onsubmit="signup(event)">
 
-      <label>Full Name</label>
-      <input type="text" required>
+      <label for="fullName">Full Name</label>
+      <input
+        type="text"
+        id="fullName"
+        name="full_name"
+        required
+      >
 
-      <label>Mobile Number</label>
-      <input type="tel" required>
+      <label for="mobile">Mobile Number</label>
+      <input
+        type="tel"
+        id="mobile"
+        name="mobile"
+        required
+      >
 
-      <label>Email</label>
-      <input type="email" required>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+      >
 
-      <label>Password</label>
-      <input type="password" required>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        minlength="6"
+        required
+      >
 
       <button type="submit">Create Account</button>
 
@@ -92,3 +113,4 @@ async function signup(event) {
 
 </body>
 </html>
+```
