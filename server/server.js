@@ -308,6 +308,71 @@ app.post("/api/profile", async (req, res) => {
   }
 });
 
+// Test Results API
+app.post("/api/results", async (req, res) => {
+  try {
+
+    const {
+      user_id,
+      subject,
+      total_questions,
+      attempted,
+      correct,
+      wrong,
+      score
+    } = req.body;
+
+    if (!user_id || !subject) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID and subject are required"
+      });
+    }
+
+    const result = await pool.query(
+      `
+      INSERT INTO test_results
+      (
+        user_id,
+        subject,
+        total_questions,
+        attempted,
+        correct,
+        wrong,
+        score
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *
+      `,
+      [
+        user_id,
+        subject,
+        total_questions || 0,
+        attempted || 0,
+        correct || 0,
+        wrong || 0,
+        score || 0
+      ]
+    );
+
+    res.status(201).json({
+      success: true,
+      message: "Test result saved successfully 🎉",
+      result: result.rows[0]
+    });
+
+  } catch (error) {
+
+    console.error("Result save error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Result save failed"
+    });
+
+  }
+});
+
 // Server
 const PORT = process.env.PORT || 3000;
 
