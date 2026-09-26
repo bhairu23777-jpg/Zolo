@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zolo | Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="index.html" class="logo">zolo</a>
+
+  <div>
+    <button onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<main class="dashboard-page">
+
+  <section class="dashboard-header">
+    <h1 id="welcome">Welcome to Zolo 👋</h1>
+    <p>Your NEET preparation dashboard</p>
+  </section>
+
+  <section class="dashboard-grid">
+
+```
+<div class="dashboard-card">
+  <h2>📝 Test Generator</h2>
+  <p>Create a custom NEET test by subject, chapter and question count.</p>
+  <a href="test.html">
+    <button>Start Test</button>
+  </a>
+</div>
+
+<div class="dashboard-card">
+  <h2>📊 My Results</h2>
+  <p>View your test attempts, scores and performance analytics.</p>
+  <button disabled>Coming Soon</button>
+</div>
+
+<div class="dashboard-card">
+  <h2>👤 My Profile</h2>
+  <p>Manage your student profile and NEET preparation details.</p>
+  <button disabled>Coming Soon</button>
+</div>
+```
+
+  </section>
+
+</main>
+
+<script>
+const savedUser = sessionStorage.getItem("zolo_user");
+
+if (!savedUser) {
+  window.location.href = "login.html";
+} else {
+  const user = JSON.parse(savedUser);
+
+  document.getElementById("welcome").textContent =
+    `Welcome, ${user.full_name} 👋`;
+}
+
+function logout() {
+  sessionStorage.removeItem("zolo_user");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
