@@ -9,48 +9,80 @@
 
 <body>
 
-  <header class="navbar">
-    <div class="logo">zolo</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Tests</a>
-      <a href="#">Results</a>
-      <a href="#">Login</a>
-    </nav>
-  </header>
+<header class="navbar">
+  <a href="index.html" class="logo">zolo</a>
 
-  <main class="hero">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="test.html">Tests</a>
+    <a href="#features">Features</a>
+    <a href="login.html" class="login-link">Login</a>
+    <a href="signup.html" class="signup-link">Sign Up</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
     <div class="hero-content">
+
       <p class="tagline">NEET Examination Ecosystem</p>
-      <h1>Prepare smarter.<br>Perform better.</h1>
+
+      <h1>
+        Prepare smarter.<br>
+        Perform better.
+      </h1>
+
       <p class="description">
-        Practice NEET questions, take dynamic tests and track your preparation.
+        Practice NEET questions, create dynamic tests,
+        analyse your performance and track your preparation.
       </p>
 
       <div class="actions">
-        <button onclick="startTest()">Start Free Test</button>
-        <button class="secondary">Create Account</button>
+        <a href="test.html" class="primary-btn">
+          Start Free Test
+        </a>
+
+        <a href="signup.html" class="secondary-btn">
+          Create Account
+        </a>
       </div>
-    </div>
-  </main>
 
-  <section class="features">
-    <div>
-      <h3>Dynamic Tests</h3>
-      <p>Choose subjects, chapters and question count.</p>
-    </div>
-
-    <div>
-      <h3>NEET Pattern</h3>
-      <p>+4 for correct and -1 for incorrect answers.</p>
-    </div>
-
-    <div>
-      <h3>Analytics</h3>
-      <p>Track your test performance and progress.</p>
     </div>
   </section>
 
-  <script src="js/app.js"></script>
+  <section class="features" id="features">
+
+    <div class="feature-card">
+      <h3>Dynamic Tests</h3>
+      <p>
+        Choose subjects, chapters and question count
+        according to your preparation.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <h3>NEET Pattern</h3>
+      <p>
+        Practice with +4 for correct and -1 for
+        incorrect answers.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <h3>Performance Analytics</h3>
+      <p>
+        Track your scores, accuracy and test performance.
+      </p>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Zolo. NEET Preparation Ecosystem.</p>
+</footer>
+
 </body>
 </html>
