@@ -1,502 +1,511 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
->
-
-  <title>Zolo | Dashboard</title>
-
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
+  <title>Dashboard | Zolo</title>
 
   <style>
-
-    .dashboard-page {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 20px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .dashboard-header {
-      margin-bottom: 30px;
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
     }
 
-    .dashboard-header h1 {
+    .navbar {
+      height: 70px;
+      background: #ffffff;
+      border-bottom: 1px solid #e8ebf2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      color: #315bea;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #5b6475;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: #315bea;
+    }
+
+    .logout {
+      border: none;
+      background: #eef2ff;
+      color: #315bea;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 35px auto;
+    }
+
+    .welcome {
+      background: linear-gradient(135deg, #315bea, #5b7cfa);
+      color: white;
+      border-radius: 22px;
+      padding: 35px;
+      margin-bottom: 25px;
+      box-shadow: 0 12px 35px rgba(49, 91, 234, 0.18);
+    }
+
+    .welcome h1 {
+      font-size: 30px;
       margin-bottom: 8px;
     }
 
-    .dashboard-header p {
-      color: #667085;
+    .welcome p {
+      opacity: 0.9;
     }
 
-    .dashboard-grid {
+    .stats {
       display: grid;
-      grid-template-columns:
-        repeat(3, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
-    .dashboard-card {
+    .stat-card {
       background: white;
-      border: 1px solid #e8ebf0;
-      border-radius: 18px;
       padding: 25px;
+      border-radius: 18px;
+      border: 1px solid #e8ebf2;
     }
 
-    .dashboard-card h2 {
-      font-size: 20px;
+    .stat-label {
+      color: #737c8e;
+      font-size: 14px;
       margin-bottom: 10px;
     }
 
-    .dashboard-card p {
-      color: #667085;
-      line-height: 1.6;
-      min-height: 55px;
+    .stat-value {
+      font-size: 29px;
+      font-weight: 800;
+      color: #172033;
     }
 
-    .dashboard-card button {
-      margin-top: 10px;
-    }
-
-    .results-section {
-      background: white;
-      border: 1px solid #e8ebf0;
-      border-radius: 18px;
-      padding: 25px;
-    }
-
-    .results-header {
+    .section-title {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
-    .results-header h2 {
-      margin: 0;
+    .section-title h2 {
+      font-size: 21px;
     }
 
-    .results-loading {
-      color: #667085;
-      padding: 20px 0;
+    .refresh {
+      border: 1px solid #dfe4ee;
+      background: white;
+      padding: 9px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 600;
     }
 
-    .result-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .result-item {
-      border: 1px solid #e8ebf0;
-      border-radius: 14px;
-      padding: 18px;
+    .quick-grid {
       display: grid;
-      grid-template-columns:
-        1.2fr
-        1fr
-        1fr
-        1fr
-        1fr;
-      gap: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+
+    .quick-card {
+      background: white;
+      border: 1px solid #e8ebf2;
+      border-radius: 18px;
+      padding: 25px;
+      text-decoration: none;
+      color: #172033;
+      transition: 0.2s;
+    }
+
+    .quick-card:hover {
+      transform: translateY(-3px);
+      border-color: #315bea;
+      box-shadow: 0 10px 25px rgba(20, 30, 60, 0.08);
+    }
+
+    .quick-icon {
+      font-size: 30px;
+      margin-bottom: 14px;
+    }
+
+    .quick-card h3 {
+      margin-bottom: 6px;
+    }
+
+    .quick-card p {
+      color: #737c8e;
+      font-size: 14px;
+    }
+
+    .results-box {
+      background: white;
+      border: 1px solid #e8ebf2;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .result-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 0.8fr 0.8fr;
+      gap: 15px;
+      padding: 18px 22px;
+      border-bottom: 1px solid #edf0f5;
       align-items: center;
     }
 
-    .result-item strong {
-      display: block;
-      margin-bottom: 4px;
+    .result-row:last-child {
+      border-bottom: none;
     }
 
-    .result-label {
-      color: #667085;
+    .result-header {
+      background: #f8f9fc;
+      color: #70798b;
       font-size: 13px;
+      font-weight: 700;
     }
 
-    .result-score {
-      font-size: 22px;
+    .score {
+      color: #315bea;
       font-weight: 800;
     }
 
-    .empty-results {
+    .empty {
+      padding: 40px 20px;
       text-align: center;
-      padding: 35px 15px;
-      color: #667085;
+      color: #737c8e;
     }
 
-    .empty-results h3 {
-      color: #172033;
-      margin-bottom: 8px;
+    .loading {
+      padding: 35px;
+      text-align: center;
+      color: #737c8e;
     }
 
-    .quick-start {
-      margin-top: 30px;
-      background: white;
-      border: 1px solid #e8ebf0;
-      border-radius: 18px;
+    .error {
       padding: 25px;
-    }
-
-    .quick-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 15px;
-    }
-
-    .logout-btn {
-      cursor: pointer;
+      text-align: center;
+      color: #c0392b;
     }
 
     @media (max-width: 800px) {
 
-      .dashboard-grid {
+      .nav-links a {
+        display: none;
+      }
+
+      .stats,
+      .quick-grid {
         grid-template-columns: 1fr;
       }
 
-      .result-item {
-        grid-template-columns:
-          repeat(2, 1fr);
+      .welcome {
+        padding: 26px;
       }
 
-    }
-
-    @media (max-width: 500px) {
-
-      .dashboard-page {
-        margin: 20px auto;
-        padding: 15px;
+      .welcome h1 {
+        font-size: 24px;
       }
 
-      .result-item {
+      .result-row {
         grid-template-columns: 1fr 1fr;
       }
 
-      .results-header {
-        align-items: flex-start;
-        flex-direction: column;
+      .result-header {
+        display: none;
       }
 
+      .navbar {
+        padding: 0 4%;
+      }
     }
-
   </style>
-
 </head>
 
 <body>
 
-<header class="navbar">
+<nav class="navbar">
 
-<a
-href="index.html"
-class="logo"
+  <a class="logo" href="index.html">zolo</a>
 
->
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="test.html">Tests</a>
+    <a href="profile.html">Profile</a>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
 
-
-  </a>
-
-  <nav>
-
-
-<a href="index.html">
-  Home
-</a>
-
-<a href="test.html">
-  Tests
-</a>
-
-<a href="profile.html">
-  Profile
-</a>
-
-<button
-  type="button"
-  class="logout-btn"
-  onclick="logout()"
->
-  Logout
-</button>
+</nav>
 
 
-  </nav>
+<main class="container">
 
-</header>
+  <section class="welcome">
 
-<main class="dashboard-page">
+    <h1 id="welcomeText">
+      Welcome to Zolo 👋
+    </h1>
 
-  <!-- HEADER -->
-
-  <section class="dashboard-header">
-
-
-<h1 id="welcome">
-  Welcome to Zolo 👋
-</h1>
-
-<p>
-  Your personal NEET preparation dashboard
-</p>
-
+    <p>
+      Your NEET preparation dashboard
+    </p>
 
   </section>
 
-  <!-- MAIN CARDS -->
 
-  <section class="dashboard-grid">
+  <section class="stats">
 
-<div class="dashboard-card">
+    <div class="stat-card">
+      <div class="stat-label">
+        Tests Attempted
+      </div>
 
-  <h2>
-    📝 Test Generator
-  </h2>
-
-  <p>
-    Create a custom NEET test by selecting
-    subject, chapter and number of questions.
-  </p>
-
-  <a href="test.html">
-
-    <button type="button">
-      Start Test
-    </button>
-
-  </a>
-
-</div>
+      <div class="stat-value" id="testsCount">
+        0
+      </div>
+    </div>
 
 
-<div class="dashboard-card">
+    <div class="stat-card">
+      <div class="stat-label">
+        Average Score
+      </div>
 
-  <h2>
-    📊 My Results
-  </h2>
-
-  <p>
-    View your saved test attempts,
-    marks and performance.
-  </p>
-
-  <button
-    type="button"
-    onclick="scrollToResults()"
-  >
-    View Results
-  </button>
-
-</div>
+      <div class="stat-value" id="averageScore">
+        0
+      </div>
+    </div>
 
 
-<div class="dashboard-card">
+    <div class="stat-card">
+      <div class="stat-label">
+        Best Score
+      </div>
 
-  <h2>
-    👤 My Profile
-  </h2>
-
-  <p>
-    Update your personal details,
-    medium and NEET target year.
-  </p>
-
-  <a href="profile.html">
-
-    <button type="button">
-      Open Profile
-    </button>
-
-  </a>
-
-</div>
-
+      <div class="stat-value" id="bestScore">
+        0
+      </div>
+    </div>
 
   </section>
 
-  <!-- RESULTS -->
 
-  <section
-    class="results-section"
-    id="resultsSection"
-  >
+  <section>
 
+    <div class="section-title">
 
-<div class="results-header">
+      <h2>Quick Actions</h2>
 
-  <h2>
-    📊 Recent Test Results
-  </h2>
-
-  <button
-    type="button"
-    onclick="loadResults()"
-  >
-    Refresh
-  </button>
-
-</div>
+    </div>
 
 
-<div
-  id="resultsContainer"
-  class="results-loading"
->
-  Loading your results...
-</div>
+    <div class="quick-grid">
 
+      <a class="quick-card" href="test.html">
+
+        <div class="quick-icon">📝</div>
+
+        <h3>Create Test</h3>
+
+        <p>
+          Generate a new NEET practice test.
+        </p>
+
+      </a>
+
+
+      <a class="quick-card" href="#results">
+
+        <div class="quick-icon">📊</div>
+
+        <h3>My Results</h3>
+
+        <p>
+          Check your previous test performance.
+        </p>
+
+      </a>
+
+
+      <a class="quick-card" href="profile.html">
+
+        <div class="quick-icon">👤</div>
+
+        <h3>My Profile</h3>
+
+        <p>
+          Update your student information.
+        </p>
+
+      </a>
+
+    </div>
 
   </section>
 
-  <!-- QUICK START -->
 
-  <section class="quick-start">
+  <section id="results">
+
+    <div class="section-title">
+
+      <h2>Recent Results</h2>
+
+      <button
+        class="refresh"
+        onclick="loadResults()"
+      >
+        ↻ Refresh
+      </button>
+
+    </div>
 
 
-<h2>
-  Quick Start 🚀
-</h2>
+    <div class="results-box">
 
-<div class="quick-actions">
+      <div class="result-row result-header">
+        <div>Subject</div>
+        <div>Date</div>
+        <div>Questions</div>
+        <div>Score</div>
+      </div>
 
-  <a href="test.html">
+      <div id="resultsContainer">
+        <div class="loading">
+          Loading results...
+        </div>
+      </div>
 
-    <button type="button">
-      Start Free Test
-    </button>
-
-  </a>
-
-  <a href="profile.html">
-
-    <button type="button">
-      Complete Profile
-    </button>
-
-  </a>
-
-</div>
-
+    </div>
 
   </section>
 
 </main>
 
+
 <script>
-
-
-/* ==========================================
-   API
-========================================== */
 
 const API_URL =
   "https://zolo-st8s.onrender.com";
 
 
-/* ==========================================
-   AUTH CHECK
-========================================== */
+function getToken() {
 
-const savedUser =
-  sessionStorage.getItem(
-    "zolo_user"
-  );
-
-
-if (!savedUser) {
-
-  window.location.href =
-    "login.html";
+  return localStorage.getItem("zolo_token");
 
 }
 
 
-let user;
+function getUser() {
 
+  try {
 
-try {
-
-  user =
-    JSON.parse(savedUser);
-
-
-  if (!user.id) {
-
-    throw new Error(
-      "Invalid user"
+    return JSON.parse(
+      localStorage.getItem("zolo_user")
     );
+
+  } catch {
+
+    return null;
+
+  }
+
+}
+
+
+function logout() {
+
+  localStorage.removeItem("zolo_token");
+  localStorage.removeItem("zolo_user");
+
+  window.location.href = "login.html";
+
+}
+
+
+async function loadResults() {
+
+  const token = getToken();
+
+  if (!token) {
+
+    window.location.href = "login.html";
+    return;
 
   }
 
 
-  document.getElementById(
-    "welcome"
-  ).textContent =
-    `Welcome, ${user.full_name} 👋`;
-
-
-} catch (error) {
-
-  sessionStorage.removeItem(
-    "zolo_user"
-  );
-
-  window.location.href =
-    "login.html";
-
-}
-
-
-/* ==========================================
-   LOAD RESULTS
-========================================== */
-
-async function loadResults() {
-
   const container =
-    document.getElementById(
-      "resultsContainer"
-    );
-
+    document.getElementById("resultsContainer");
 
   container.innerHTML =
-    `
-      <div class="results-loading">
-        Loading your results...
-      </div>
-    `;
+    '<div class="loading">Loading results...</div>';
 
 
   try {
 
-    const response =
-      await fetch(
-        `${API_URL}/api/results/${user.id}`
-      );
+    const response = await fetch(
+      API_URL + "/api/results",
+      {
+        method: "GET",
+
+        headers: {
+          "Authorization":
+            "Bearer " + token
+        }
+      }
+    );
+
+
+    if (response.status === 401) {
+
+      logout();
+      return;
+
+    }
 
 
     const data =
       await response.json();
 
 
-    if (
-      !response.ok ||
-      !data.success
-    ) {
+    if (!response.ok || !data.success) {
 
       throw new Error(
-        data.message ||
-        "Unable to load results"
+        data.message || "Unable to load results"
       );
 
     }
@@ -506,316 +515,194 @@ async function loadResults() {
       data.results || [];
 
 
-    if (
-      results.length === 0
-    ) {
+    updateStats(results);
 
-      container.innerHTML =
-        `
-          <div class="empty-results">
 
-            <h3>
-              No tests attempted yet 📚
-            </h3>
+    if (results.length === 0) {
 
-            <p>
-              Start your first NEET test
-              to see your performance here.
-            </p>
-
-            <br>
-
-            <a href="test.html">
-
-              <button type="button">
-                Start First Test
-              </button>
-
-            </a>
-
-          </div>
-        `;
+      container.innerHTML = `
+        <div class="empty">
+          <h3>No tests yet 📚</h3>
+          <p>Take your first test to see your results here.</p>
+        </div>
+      `;
 
       return;
 
     }
 
 
-    const list =
-      document.createElement(
-        "div"
-      );
-
-
-    list.className =
-      "result-list";
-
-
-    results.forEach(
-      result => {
-
-        const item =
-          document.createElement(
-            "div"
-          );
-
-
-        item.className =
-          "result-item";
-
+    container.innerHTML =
+      results.slice(0, 10).map(result => {
 
         const date =
-          formatDate(
-            result.created_at
-          );
+          result.created_at
+            ? new Date(
+                result.created_at
+              ).toLocaleDateString(
+                "en-IN"
+              )
+            : "-";
 
 
-        item.innerHTML =
-          `
+        const total =
+          result.total_questions ?? "-";
+
+
+        const score =
+          result.score ?? 0;
+
+
+        return `
+
+          <div class="result-row">
+
             <div>
-
-              <span class="result-label">
-                Subject
-              </span>
-
               <strong>
-                ${escapeHTML(
-                  result.subject
+                ${escapeHtml(
+                  result.subject || "Test"
                 )}
               </strong>
-
             </div>
-
 
             <div>
-
-              <span class="result-label">
-                Score
-              </span>
-
-              <strong class="result-score">
-                ${result.score}
-              </strong>
-
+              ${date}
             </div>
-
 
             <div>
-
-              <span class="result-label">
-                Correct
-              </span>
-
-              <strong>
-                ${result.correct}
-              </strong>
-
+              ${total}
             </div>
 
-
-            <div>
-
-              <span class="result-label">
-                Wrong
-              </span>
-
-              <strong>
-                ${result.wrong}
-              </strong>
-
+            <div class="score">
+              ${score}
             </div>
 
+          </div>
 
-            <div>
+        `;
 
-              <span class="result-label">
-                Date
-              </span>
-
-              <strong>
-                ${date}
-              </strong>
-
-            </div>
-          `;
-
-
-        list.appendChild(
-          item
-        );
-
-      }
-    );
-
-
-    container.innerHTML =
-      "";
-
-    container.appendChild(
-      list
-    );
+      }).join("");
 
 
   } catch (error) {
 
-    console.error(
-      "Results loading error:",
-      error
-    );
+    console.error(error);
 
-
-    container.innerHTML =
-      `
-        <div class="empty-results">
-
-          <h3>
-            Could not load results
-          </h3>
-
-          <p>
-            Server se results load nahi ho pa rahe.
-            Please try again.
-          </p>
-
-          <br>
-
-          <button
-            type="button"
-            onclick="loadResults()"
-          >
-            Try Again
-          </button>
-
-        </div>
-      `;
+    container.innerHTML = `
+      <div class="error">
+        Results load nahi ho paaye.
+        <br>
+        Please try again.
+      </div>
+    `;
 
   }
 
 }
 
 
-/* ==========================================
-   DATE FORMAT
-========================================== */
+function updateStats(results) {
 
-function formatDate(
-  dateString
-) {
-
-  if (!dateString) {
-
-    return "-";
-
-  }
+  const count =
+    results.length;
 
 
-  const date =
-    new Date(
-      dateString
-    );
+  document.getElementById(
+    "testsCount"
+  ).textContent = count;
 
 
-  if (
-    Number.isNaN(
-      date.getTime()
-    )
-  ) {
+  if (!count) {
 
-    return "-";
+    document.getElementById(
+      "averageScore"
+    ).textContent = "0";
+
+
+    document.getElementById(
+      "bestScore"
+    ).textContent = "0";
+
+    return;
 
   }
 
 
-  return date.toLocaleString(
-    "en-IN",
-    {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    }
-  );
-
-}
-
-
-/* ==========================================
-   HTML SAFETY
-========================================== */
-
-function escapeHTML(
-  value
-) {
-
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
+  const scores =
+    results.map(
+      item => Number(item.score) || 0
     );
 
+
+  const total =
+    scores.reduce(
+      (sum, score) =>
+        sum + score,
+      0
+    );
+
+
+  const average =
+    Math.round(
+      total / scores.length
+    );
+
+
+  const best =
+    Math.max(...scores);
+
+
+  document.getElementById(
+    "averageScore"
+  ).textContent = average;
+
+
+  document.getElementById(
+    "bestScore"
+  ).textContent = best;
+
 }
 
 
-/* ==========================================
-   SCROLL RESULTS
-========================================== */
+function escapeHtml(value) {
 
-function scrollToResults() {
-
-  document
-    .getElementById(
-      "resultsSection"
-    )
-    .scrollIntoView({
-      behavior: "smooth"
-    });
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
 }
 
 
-/* ==========================================
-   LOGOUT
-========================================== */
+const user = getUser();
 
-function logout() {
 
-  sessionStorage.removeItem(
-    "zolo_user"
-  );
+if (!getToken()) {
 
   window.location.href =
     "login.html";
 
+} else {
+
+  if (user?.full_name) {
+
+    document.getElementById(
+      "welcomeText"
+    ).textContent =
+      "Welcome back, " +
+      user.full_name +
+      " 👋";
+
+  }
+
+  loadResults();
+
 }
-
-
-/* ==========================================
-   INITIAL LOAD
-========================================== */
-
-loadResults();
 
 </script>
 
 </body>
-
 </html>
+
