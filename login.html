@@ -1,95 +1,127 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zolo | Login</title>
+  <title>Login | Zolo</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<header class="navbar">
-  <a href="index.html" class="logo">zolo</a>
-</header>
+  <div class="auth-container">
+    <div class="auth-card">
 
-<main class="auth-page">
+      <h1>Zolo</h1>
+      <p>Login to your NEET preparation account</p>
 
-  <div class="auth-card">
+      <form id="loginForm">
 
-    <h1>Welcome back</h1>
-    <p>Login to continue your NEET preparation.</p>
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          required
+        >
 
-    <form onsubmit="login(event)">
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required
+        >
 
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
+        <button type="submit">
+          Login
+        </button>
 
-      <label for="password">Password</label>
-      <input type="password" id="password" required>
+      </form>
 
-      <button type="submit">Login</button>
+      <p>
+        Don't have an account?
+        <a href="signup.html">Create Account</a>
+      </p>
 
-    </form>
+      <p>
+        <a href="index.html">← Back to Home</a>
+      </p>
 
-    <p class="auth-bottom">
-      Don't have an account?
-      <a href="signup.html">Create account</a>
-    </p>
-
+    </div>
   </div>
 
-</main>
-
 <script>
-async function login(event) {
-  event.preventDefault();
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+const API_URL = "https://zolo-st8s.onrender.com";
 
-  try {
-    const response = await fetch(
-      "https://zolo-st8s.onrender.com/api/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email,
-          password
-        })
+document
+  .getElementById("loginForm")
+  .addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email =
+      document.getElementById("email").value.trim();
+
+    const password =
+      document.getElementById("password").value;
+
+    try {
+
+      const response = await fetch(
+        API_URL + "/api/login",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            email,
+            password
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        alert(data.message || "Login failed");
+        return;
       }
-    );
 
-    const data = await response.json();
+      /*
+        REAL JWT SESSION
+      */
 
-    if (data.success) {
+      localStorage.setItem(
+        "zolo_token",
+        data.token
+      );
 
-      // Save basic logged-in user information
-      sessionStorage.setItem(
+      localStorage.setItem(
         "zolo_user",
         JSON.stringify(data.user)
       );
 
       alert("Login successful 🎉");
 
-      window.location.href = "dashboard.html";
+      window.location.href =
+        "dashboard.html";
 
-    } else {
-      alert(data.message);
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Server se connection nahi ho pa raha."
+      );
+
     }
 
-  } catch (error) {
-    console.error("Login error:", error);
+  });
 
-    alert("Server se connection nahi ho pa raha.");
-  }
-}
 </script>
 
 </body>
 </html>
-```
