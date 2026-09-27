@@ -1,34 +1,253 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
   <title>Zolo | Dashboard</title>
-  <link rel="stylesheet" href="css/style.css">
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <style>
+
+    .dashboard-page {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .dashboard-header {
+      margin-bottom: 30px;
+    }
+
+    .dashboard-header h1 {
+      margin-bottom: 8px;
+    }
+
+    .dashboard-header p {
+      color: #667085;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .dashboard-card {
+      background: white;
+      border: 1px solid #e8ebf0;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .dashboard-card h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-card p {
+      color: #667085;
+      line-height: 1.6;
+      min-height: 55px;
+    }
+
+    .dashboard-card button {
+      margin-top: 10px;
+    }
+
+    .results-section {
+      background: white;
+      border: 1px solid #e8ebf0;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .results-header h2 {
+      margin: 0;
+    }
+
+    .results-loading {
+      color: #667085;
+      padding: 20px 0;
+    }
+
+    .result-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .result-item {
+      border: 1px solid #e8ebf0;
+      border-radius: 14px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns:
+        1.2fr
+        1fr
+        1fr
+        1fr
+        1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .result-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .result-label {
+      color: #667085;
+      font-size: 13px;
+    }
+
+    .result-score {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .empty-results {
+      text-align: center;
+      padding: 35px 15px;
+      color: #667085;
+    }
+
+    .empty-results h3 {
+      color: #172033;
+      margin-bottom: 8px;
+    }
+
+    .quick-start {
+      margin-top: 30px;
+      background: white;
+      border: 1px solid #e8ebf0;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .logout-btn {
+      cursor: pointer;
+    }
+
+    @media (max-width: 800px) {
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .result-item {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+    }
+
+    @media (max-width: 500px) {
+
+      .dashboard-page {
+        margin: 20px auto;
+        padding: 15px;
+      }
+
+      .result-item {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .results-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+    }
+
+  </style>
+
 </head>
 
 <body>
 
 <header class="navbar">
 
-<a href="index.html" class="logo">zolo</a>
+<a
+href="index.html"
+class="logo"
+
+>
+
+```
+zolo
+```
+
+  </a>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="test.html">Tests</a>
-    <a href="profile.html">Profile</a>
-    <button onclick="logout()">Logout</button>
+
+```
+<a href="index.html">
+  Home
+</a>
+
+<a href="test.html">
+  Tests
+</a>
+
+<a href="profile.html">
+  Profile
+</a>
+
+<button
+  type="button"
+  class="logout-btn"
+  onclick="logout()"
+>
+  Logout
+</button>
+```
+
   </nav>
 
 </header>
 
 <main class="dashboard-page">
 
+  <!-- HEADER -->
+
   <section class="dashboard-header">
 
 ```
-<h1 id="welcome">Welcome to Zolo 👋</h1>
+<h1 id="welcome">
+  Welcome to Zolo 👋
+</h1>
 
 <p>
   Your personal NEET preparation dashboard
@@ -37,14 +256,16 @@
 
   </section>
 
+  <!-- MAIN CARDS -->
+
   <section class="dashboard-grid">
 
 ```
-<!-- Test Generator -->
-
 <div class="dashboard-card">
 
-  <h2>📝 Test Generator</h2>
+  <h2>
+    📝 Test Generator
+  </h2>
 
   <p>
     Create a custom NEET test by selecting
@@ -52,35 +273,42 @@
   </p>
 
   <a href="test.html">
-    <button>Start Test</button>
+
+    <button type="button">
+      Start Test
+    </button>
+
   </a>
 
 </div>
 
 
-<!-- Results -->
-
 <div class="dashboard-card">
 
-  <h2>📊 My Results</h2>
+  <h2>
+    📊 My Results
+  </h2>
 
   <p>
-    View your test attempts, marks and
-    performance analytics.
+    View your saved test attempts,
+    marks and performance.
   </p>
 
-  <button disabled>
-    Coming Soon
+  <button
+    type="button"
+    onclick="scrollToResults()"
+  >
+    View Results
   </button>
 
 </div>
 
 
-<!-- Profile -->
-
 <div class="dashboard-card">
 
-  <h2>👤 My Profile</h2>
+  <h2>
+    👤 My Profile
+  </h2>
 
   <p>
     Update your personal details,
@@ -88,7 +316,11 @@
   </p>
 
   <a href="profile.html">
-    <button>Open Profile</button>
+
+    <button type="button">
+      Open Profile
+    </button>
+
   </a>
 
 </div>
@@ -96,21 +328,65 @@
 
   </section>
 
-  <!-- Quick Actions -->
+  <!-- RESULTS -->
 
-  <section class="dashboard-quick">
+  <section
+    class="results-section"
+    id="resultsSection"
+  >
 
 ```
-<h2>Quick Start 🚀</h2>
+<div class="results-header">
+
+  <h2>
+    📊 Recent Test Results
+  </h2>
+
+  <button
+    type="button"
+    onclick="loadResults()"
+  >
+    Refresh
+  </button>
+
+</div>
+
+
+<div
+  id="resultsContainer"
+  class="results-loading"
+>
+  Loading your results...
+</div>
+```
+
+  </section>
+
+  <!-- QUICK START -->
+
+  <section class="quick-start">
+
+```
+<h2>
+  Quick Start 🚀
+</h2>
 
 <div class="quick-actions">
 
   <a href="test.html">
-    <button>Start Free Test</button>
+
+    <button type="button">
+      Start Free Test
+    </button>
+
   </a>
 
   <a href="profile.html">
-    <button>Complete Profile</button>
+
+    <button type="button">
+      Complete Profile
+    </button>
+
   </a>
 
 </div>
@@ -122,44 +398,428 @@
 
 <script>
 
+
+/* ==========================================
+   API
+========================================== */
+
+const API_URL =
+  "https://zolo-st8s.onrender.com";
+
+
+/* ==========================================
+   AUTH CHECK
+========================================== */
+
 const savedUser =
-  sessionStorage.getItem("zolo_user");
+  sessionStorage.getItem(
+    "zolo_user"
+  );
 
 
 if (!savedUser) {
 
-  window.location.href = "login.html";
+  window.location.href =
+    "login.html";
 
-} else {
+}
+
+
+let user;
+
+
+try {
+
+  user =
+    JSON.parse(savedUser);
+
+
+  if (!user.id) {
+
+    throw new Error(
+      "Invalid user"
+    );
+
+  }
+
+
+  document.getElementById(
+    "welcome"
+  ).textContent =
+    `Welcome, ${user.full_name} 👋`;
+
+
+} catch (error) {
+
+  sessionStorage.removeItem(
+    "zolo_user"
+  );
+
+  window.location.href =
+    "login.html";
+
+}
+
+
+/* ==========================================
+   LOAD RESULTS
+========================================== */
+
+async function loadResults() {
+
+  const container =
+    document.getElementById(
+      "resultsContainer"
+    );
+
+
+  container.innerHTML =
+    `
+      <div class="results-loading">
+        Loading your results...
+      </div>
+    `;
+
 
   try {
 
-    const user =
-      JSON.parse(savedUser);
+    const response =
+      await fetch(
+        `${API_URL}/api/results/${user.id}`
+      );
 
-    document.getElementById("welcome").textContent =
-      `Welcome, ${user.full_name} 👋`;
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !data.success
+    ) {
+
+      throw new Error(
+        data.message ||
+        "Unable to load results"
+      );
+
+    }
+
+
+    const results =
+      data.results || [];
+
+
+    if (
+      results.length === 0
+    ) {
+
+      container.innerHTML =
+        `
+          <div class="empty-results">
+
+            <h3>
+              No tests attempted yet 📚
+            </h3>
+
+            <p>
+              Start your first NEET test
+              to see your performance here.
+            </p>
+
+            <br>
+
+            <a href="test.html">
+
+              <button type="button">
+                Start First Test
+              </button>
+
+            </a>
+
+          </div>
+        `;
+
+      return;
+
+    }
+
+
+    const list =
+      document.createElement(
+        "div"
+      );
+
+
+    list.className =
+      "result-list";
+
+
+    results.forEach(
+      result => {
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        item.className =
+          "result-item";
+
+
+        const date =
+          formatDate(
+            result.created_at
+          );
+
+
+        item.innerHTML =
+          `
+            <div>
+
+              <span class="result-label">
+                Subject
+              </span>
+
+              <strong>
+                ${escapeHTML(
+                  result.subject
+                )}
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span class="result-label">
+                Score
+              </span>
+
+              <strong class="result-score">
+                ${result.score}
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span class="result-label">
+                Correct
+              </span>
+
+              <strong>
+                ${result.correct}
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span class="result-label">
+                Wrong
+              </span>
+
+              <strong>
+                ${result.wrong}
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span class="result-label">
+                Date
+              </span>
+
+              <strong>
+                ${date}
+              </strong>
+
+            </div>
+          `;
+
+
+        list.appendChild(
+          item
+        );
+
+      }
+    );
+
+
+    container.innerHTML =
+      "";
+
+    container.appendChild(
+      list
+    );
+
 
   } catch (error) {
 
-    sessionStorage.removeItem("zolo_user");
+    console.error(
+      "Results loading error:",
+      error
+    );
 
-    window.location.href = "login.html";
+
+    container.innerHTML =
+      `
+        <div class="empty-results">
+
+          <h3>
+            Could not load results
+          </h3>
+
+          <p>
+            Server se results load nahi ho pa rahe.
+            Please try again.
+          </p>
+
+          <br>
+
+          <button
+            type="button"
+            onclick="loadResults()"
+          >
+            Try Again
+          </button>
+
+        </div>
+      `;
 
   }
 
 }
 
 
-function logout() {
+/* ==========================================
+   DATE FORMAT
+========================================== */
 
-  sessionStorage.removeItem("zolo_user");
+function formatDate(
+  dateString
+) {
 
-  window.location.href = "login.html";
+  if (!dateString) {
+
+    return "-";
+
+  }
+
+
+  const date =
+    new Date(
+      dateString
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "-";
+
+  }
+
+
+  return date.toLocaleString(
+    "en-IN",
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
 
 }
+
+
+/* ==========================================
+   HTML SAFETY
+========================================== */
+
+function escapeHTML(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* ==========================================
+   SCROLL RESULTS
+========================================== */
+
+function scrollToResults() {
+
+  document
+    .getElementById(
+      "resultsSection"
+    )
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+
+}
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+function logout() {
+
+  sessionStorage.removeItem(
+    "zolo_user"
+  );
+
+  window.location.href =
+    "login.html";
+
+}
+
+
+/* ==========================================
+   INITIAL LOAD
+========================================== */
+
+loadResults();
 
 </script>
 
 </body>
+
 </html>
